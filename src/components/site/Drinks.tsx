@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { GiCoffeeCup, GiTeapot, GiMilkCarton, GiOrangeSlice, GiCocktailShaker, GiWaterBottle, GiChocolateBar } from "react-icons/gi";
+import { GiCoffeeCup, GiTeapot, GiMilkCarton, GiOrangeSlice, GiMartini, GiWaterBottle, GiChocolateBar } from "react-icons/gi";
 
 const DRINKS = [
   { icon: GiWaterBottle, name: "Cold Drinks", desc: "Chilled colas, sodas & sparkling", price: "from ₹40" },
@@ -8,7 +8,7 @@ const DRINKS = [
   { icon: GiCoffeeCup, name: "Cold Coffee", desc: "Espresso, milk & ice-cream", price: "₹130" },
   { icon: GiChocolateBar, name: "Milkshakes", desc: "Thick chocolate, vanilla & strawberry", price: "₹120" },
   { icon: GiMilkCarton, name: "Lassi", desc: "Sweet, salted or mango lassi", price: "from ₹80" },
-  { icon: GiCocktailShaker, name: "Mocktails", desc: "Refreshing non-alcoholic mixes", price: "from ₹100" },
+  { icon: GiMartini, name: "Mocktails", desc: "Refreshing non-alcoholic mixes", price: "from ₹100" },
 ];
 
 export function Drinks() {
