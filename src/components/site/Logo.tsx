@@ -7,13 +7,13 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       <img
         src={logoMark.url}
         alt="Ganesh Dhaba"
-        className="h-11 w-11 shrink-0 rounded-full object-contain transition group-hover:scale-105"
+        className="h-16 w-16 shrink-0 rounded-full object-contain transition group-hover:scale-105 sm:h-20 sm:w-20"
       />
       {!compact && (
         <img
           src={wordmark.url}
           alt="Ganesh Dhaba"
-          className="h-7 w-auto object-contain sm:h-8"
+          className="h-10 w-auto object-contain sm:h-12"
         />
       )}
     </a>
