@@ -10,23 +10,14 @@ const WA_URL =
   "https://wa.me/919999999999?text=Hi%20Ganesh%20Dhaba%2C%20I'd%20like%20to%20place%20an%20order.";
 
 export function Hero() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!titleRef.current) return;
-    const letters = titleRef.current.querySelectorAll("[data-letter]");
     gsap.fromTo(
-      letters,
-      { y: 60, opacity: 0, rotateX: -40 },
-      {
-        y: 0,
-        opacity: 1,
-        rotateX: 0,
-        duration: 1.1,
-        ease: "power4.out",
-        stagger: 0.045,
-        delay: 0.2,
-      }
+      titleRef.current,
+      { y: 60, opacity: 0, scale: 0.9 },
+      { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: "power4.out", delay: 0.2 }
     );
   }, []);
 
