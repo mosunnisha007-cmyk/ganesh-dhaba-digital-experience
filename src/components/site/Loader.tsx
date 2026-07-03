@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import logoMark from "@/assets/ganesh-logo.png.asset.json";
+import wordmark from "@/assets/ganesh-wordmark.png.asset.json";
 
 export function Loader() {
   const [visible, setVisible] = useState(true);
