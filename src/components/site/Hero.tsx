@@ -4,20 +4,28 @@ import { HiArrowDown } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
 import gsap from "gsap";
 import heroImg from "@/assets/hero-dhaba.jpg";
-import wordmark from "@/assets/ganesh-wordmark.png.asset.json";
 
 const WA_URL =
   "https://wa.me/919999999999?text=Hi%20Ganesh%20Dhaba%2C%20I'd%20like%20to%20place%20an%20order.";
 
 export function Hero() {
-  const titleRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (!titleRef.current) return;
+    const letters = titleRef.current.querySelectorAll("[data-letter]");
     gsap.fromTo(
-      titleRef.current,
-      { y: 60, opacity: 0, scale: 0.9 },
-      { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: "power4.out", delay: 0.2 }
+      letters,
+      { y: 60, opacity: 0, rotateX: -40 },
+      {
+        y: 0,
+        opacity: 1,
+        rotateX: 0,
+        duration: 1.1,
+        ease: "power4.out",
+        stagger: 0.045,
+        delay: 0.2,
+      }
     );
   }, []);
 
@@ -68,14 +76,22 @@ export function Hero() {
           Authentic Indian Dhaba • Est. 2014
         </motion.p>
 
-        <div ref={titleRef} aria-label="GANESH DHABA" className="mx-auto">
-          <img
-            src={wordmark.url}
-            alt="Ganesh Dhaba"
-            className="mx-auto w-full max-w-[280px] object-contain drop-shadow-[0_10px_40px_rgba(193,18,31,0.55)] brightness-0 invert-[0] sm:max-w-md md:max-w-2xl lg:max-w-3xl"
-            style={{ filter: "drop-shadow(0 6px 24px rgba(0,0,0,0.55))" }}
-          />
-        </div>
+        <h1
+          ref={titleRef}
+          className="font-display text-5xl font-bold leading-[0.95] sm:text-7xl md:text-[104px]"
+          aria-label="GANESH DHABA"
+        >
+          <span className="block overflow-hidden">
+            {"GANESH".split("").map((c, i) => (
+              <span key={i} data-letter className="inline-block">{c}</span>
+            ))}
+          </span>
+          <span className="block overflow-hidden text-gradient-gold">
+            {"DHABA".split("").map((c, i) => (
+              <span key={i} data-letter className="inline-block">{c}</span>
+            ))}
+          </span>
+        </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
