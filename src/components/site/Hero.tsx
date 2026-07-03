@@ -68,22 +68,14 @@ export function Hero() {
           Authentic Indian Dhaba • Est. 2014
         </motion.p>
 
-        <h1
-          ref={titleRef}
-          className="font-display text-5xl font-bold leading-[0.95] sm:text-7xl md:text-[104px]"
-          aria-label="GANESH DHABA"
-        >
-          <span className="block overflow-hidden">
-            {"GANESH".split("").map((c, i) => (
-              <span key={i} data-letter className="inline-block">{c}</span>
-            ))}
-          </span>
-          <span className="block overflow-hidden text-gradient-gold">
-            {"DHABA".split("").map((c, i) => (
-              <span key={i} data-letter className="inline-block">{c}</span>
-            ))}
-          </span>
-        </h1>
+        <div ref={titleRef} aria-label="GANESH DHABA" className="mx-auto">
+          <img
+            src={wordmark.url}
+            alt="Ganesh Dhaba"
+            className="mx-auto w-full max-w-[280px] object-contain drop-shadow-[0_10px_40px_rgba(193,18,31,0.55)] brightness-0 invert-[0] sm:max-w-md md:max-w-2xl lg:max-w-3xl"
+            style={{ filter: "drop-shadow(0 6px 24px rgba(0,0,0,0.55))" }}
+          />
+        </div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
