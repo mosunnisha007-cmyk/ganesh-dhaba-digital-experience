@@ -62,7 +62,7 @@ export function Navbar() {
               scrolled ? "border-primary/10" : ""
             }`}
           >
-            <Logo />
+            <Logo hideWordmark logoClassName="h-[60px] w-[60px]" />
             <nav className="hidden items-center gap-1 lg:flex">
               {NAV.map((n) => (
                 <a
