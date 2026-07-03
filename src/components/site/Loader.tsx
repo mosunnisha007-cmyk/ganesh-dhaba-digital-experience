@@ -25,7 +25,7 @@ export function Loader() {
               initial={{ scale: 0.6, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6 }}
-              className="mx-auto h-24 w-24 object-contain"
+              className="mx-auto h-[140px] w-[140px] object-contain"
             />
             <motion.img
               src={wordmark.url}
@@ -33,7 +33,7 @@ export function Loader() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mx-auto mt-4 h-10 w-auto object-contain"
+              className="mx-auto mt-4 h-14 w-auto object-contain"
             />
             <div className="mx-auto mt-4 h-1 w-40 overflow-hidden rounded-full bg-secondary">
               <div className="shimmer h-full w-full" />
