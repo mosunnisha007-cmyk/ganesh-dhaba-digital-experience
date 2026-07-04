@@ -1,12 +1,8 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { HiArrowDown } from "react-icons/hi";
-import { FaWhatsapp } from "react-icons/fa";
 import gsap from "gsap";
 import heroImg from "@/assets/hero-dhaba.jpg";
-
-const WA_URL =
-  "https://wa.me/919999999999?text=Hi%20Ganesh%20Dhaba%2C%20I'd%20like%20to%20place%20an%20order.";
 
 export function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -113,20 +109,6 @@ export function Hero() {
             className="btn-glow rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground"
           >
             Explore Menu
-          </a>
-          <a
-            href="#contact"
-            className="rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
-          >
-            Visit Us
-          </a>
-          <a
-            href={WA_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.6)] transition hover:brightness-110"
-          >
-            <FaWhatsapp size={18} /> Order on WhatsApp
           </a>
         </motion.div>
       </div>
