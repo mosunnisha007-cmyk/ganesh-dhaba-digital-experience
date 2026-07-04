@@ -110,20 +110,6 @@ export function Hero() {
           >
             Explore Menu
           </a>
-          <a
-            href="#contact"
-            className="rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
-          >
-            Visit Us
-          </a>
-          <a
-            href={WA_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.6)] transition hover:brightness-110"
-          >
-            <FaWhatsapp size={18} /> Order on WhatsApp
-          </a>
         </motion.div>
       </div>
 
