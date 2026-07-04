@@ -82,7 +82,7 @@ export function Hero() {
               <span key={i} data-letter className="inline-block">{c}</span>
             ))}
           </span>
-          <span className="block overflow-hidden text-gradient-gold">
+          <span className="block overflow-hidden text-white">
             {"DHABA".split("").map((c, i) => (
               <span key={i} data-letter className="inline-block">{c}</span>
             ))}
