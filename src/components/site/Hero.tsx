@@ -1,12 +1,8 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { HiArrowDown } from "react-icons/hi";
-import { FaWhatsapp } from "react-icons/fa";
 import gsap from "gsap";
 import heroImg from "@/assets/hero-dhaba.jpg";
-
-const WA_URL =
-  "https://wa.me/919999999999?text=Hi%20Ganesh%20Dhaba%2C%20I'd%20like%20to%20place%20an%20order.";
 
 export function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
