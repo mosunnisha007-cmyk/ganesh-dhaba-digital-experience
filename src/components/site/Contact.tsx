@@ -74,8 +74,8 @@ export function Contact() {
             className="space-y-6"
           >
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <Info icon={<HiLocationMarker size={20} />} title="Address" line="MG Road, Sector 22, Near City Mall, New Delhi 110001" />
-              <Info icon={<HiClock size={20} />} title="Opening Hours" line="Mon – Sun • 10:00 AM – 11:30 PM" />
+              <Info icon={<HiLocationMarker size={20} />} title="Address" line="Infront of Veshnodam Mandir, A-16, Inderprasth, Kundan Vihar, Ridmalsar Purohitan, Bikaner, Rajasthan 334022" />
+              <Info icon={<HiClock size={20} />} title="Opening Hours" line="Mon – Sun • Open till 11:00 PM" />
               <Info icon={<HiPhone size={20} />} title="Phone" line="+91 99999 99999" href="tel:+919999999999" />
               <Info icon={<HiOutlineMail size={20} />} title="Email" line="hello@ganeshdhaba.in" href="mailto:hello@ganeshdhaba.in" />
             </div>
@@ -87,15 +87,15 @@ export function Contact() {
               <a href={WA_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white">
                 <FaWhatsapp /> WhatsApp
               </a>
-              <a href="https://maps.google.com/?q=MG+Road+Sector+22+New+Delhi" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold">
+              <a href="https://www.google.com/maps/search/?api=1&query=Shree+Ganesh+Dhaba+Ridmalsar+Purohitan+Bikaner" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold">
                 <FaDirections /> Directions
               </a>
             </div>
 
             <div className="overflow-hidden rounded-3xl border border-border shadow-soft">
               <iframe
-                title="Ganesh Dhaba Location"
-                src="https://www.google.com/maps?q=New+Delhi+India&output=embed"
+                title="Shree Ganesh Dhaba Location"
+                src="https://www.google.com/maps?q=Shree+Ganesh+Dhaba+Ridmalsar+Purohitan+Bikaner&output=embed"
                 loading="lazy"
                 className="h-[320px] w-full"
                 referrerPolicy="no-referrer-when-downgrade"

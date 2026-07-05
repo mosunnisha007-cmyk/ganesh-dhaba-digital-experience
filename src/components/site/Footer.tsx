@@ -62,7 +62,7 @@ export function Footer() {
               <li className="text-background/60">Kitchen closes 30 min prior</li>
             </ul>
             <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-[var(--color-gold)]">Visit</p>
-            <p className="mt-2 text-sm text-background/75">MG Road, Sector 22,<br />New Delhi 110001</p>
+            <p className="mt-2 text-sm text-background/75">Infront of Veshnodam Mandir,<br />A-16, Inderprasth, Kundan Vihar,<br />Ridmalsar Purohitan, Bikaner,<br />Rajasthan 334022</p>
           </div>
         </div>
 
