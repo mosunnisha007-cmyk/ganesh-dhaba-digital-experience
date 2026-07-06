@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { Logo } from "./Logo";
-import thaliBg from "@/assets/thali-bg.jpg.asset.json";
 
 const NAV = [
   { id: "home", label: "Home", href: "/#home" },
@@ -59,15 +58,10 @@ export function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div
-            className={`glass relative overflow-hidden flex items-center justify-between gap-4 rounded-full px-4 py-1.5 shadow-soft transition-all ${
+            className={`glass flex items-center justify-between gap-4 rounded-full px-4 py-1.5 shadow-soft transition-all ${
               scrolled ? "border-primary/10" : ""
             }`}
           >
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-25"
-              style={{ backgroundImage: `url(${thaliBg.url})` }}
-            />
-            <div className="absolute inset-0 bg-black/30" />
             <Logo hideWordmark logoClassName="h-[70px] w-[70px]" />
             <nav className="hidden items-center gap-1 lg:flex">
               {NAV.map((n) => (
