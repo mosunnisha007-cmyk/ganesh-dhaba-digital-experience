@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { Logo } from "./Logo";
+import thaliBg from "@/assets/thali-bg.jpg.asset.json";
 
 const NAV = [
   { id: "home", label: "Home", href: "/#home" },
