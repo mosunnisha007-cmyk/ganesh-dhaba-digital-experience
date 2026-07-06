@@ -4,16 +4,14 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { Logo } from "./Logo";
 
 const NAV = [
-  { id: "home", label: "Home", href: "/#home" },
-  { id: "about", label: "About", href: "/#about" },
+  { id: "about", label: "Our Story", href: "/#about" },
+  { id: "ambience", label: "Ambience", href: "/#ambience" },
   { id: "menu", label: "Menu", href: "/menu" },
-  { id: "gallery", label: "Gallery", href: "/#gallery" },
+  { id: "chefs-creation", label: "Chefs Creation", href: "/#chefs-creation" },
   { id: "reviews", label: "Reviews", href: "/#reviews" },
-  { id: "contact", label: "Contact", href: "/#contact" },
+  { id: "location", label: "Location", href: "/#contact" },
+  { id: "contact", label: "Contact Us", href: "/#contact" },
 ];
-
-const WA_URL =
-  "https://wa.me/919999999999?text=Hi%20Ganesh%20Dhaba%2C%20I'd%20like%20to%20place%20an%20order.";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
