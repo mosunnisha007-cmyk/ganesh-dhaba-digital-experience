@@ -1,3 +1,5 @@
+import butterRotiImg from "@/assets/butter-roti.jpg";
+
 export type MenuItem = {
   id: string;
   name: string;
@@ -77,7 +79,7 @@ export const MENU: MenuItem[] = [
     image: img("photo-1590080875515-8a3a8dc5735e") },
   { id: "rot", name: "Butter Roti", category: "Roti", price: 25, veg: true, rating: 4.6,
     desc: "Soft tandoor-baked whole wheat roti brushed with ghee.",
-    image: img("photo-1626074353765-517a681e40be") },
+    image: butterRotiImg },
   { id: "cd", name: "Chilled Cola", category: "Cold Drinks", price: 50, veg: true, rating: 4.4,
     desc: "Ice-cold classic cola to refresh every bite.",
     image: img("photo-1622483767028-3f66f32aef97") },

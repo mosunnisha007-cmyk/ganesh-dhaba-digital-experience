@@ -47,8 +47,8 @@ function Index() {
         <WhyChooseUs />
         <Menu />
         <Signature />
-        <FamilyDining />
         <Drinks />
+        <FamilyDining />
         <Reviews />
         <Contact />
       </main>

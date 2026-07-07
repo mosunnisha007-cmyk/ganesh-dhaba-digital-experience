@@ -4,6 +4,7 @@ import { HiOutlineSearch, HiOutlineHeart, HiHeart } from "react-icons/hi";
 import { FaLeaf } from "react-icons/fa";
 import { CATEGORIES, MENU, type MenuItem } from "@/lib/menu-data";
 import { toast } from "sonner";
+import { useCart } from "@/hooks/use-cart";
 
 export function Menu() {
   const [q, setQ] = useState("");
@@ -16,8 +17,17 @@ export function Menu() {
       .filter((m) => (ql ? m.name.toLowerCase().includes(ql) || m.desc.toLowerCase().includes(ql) : true));
   }, [q, cat]);
 
-  const addToCart = (m: MenuItem) => {
-    toast.success(`${m.name} added to cart`, { description: `₹${m.price} • Demo cart` });
+  const { addToCart, setCartOpen } = useCart();
+
+  const handleAddToCart = (m: MenuItem) => {
+    addToCart(m);
+    toast.success(`${m.name} added to cart`, {
+      description: `₹${m.price} • View list in cart`,
+      action: {
+        label: "View Cart",
+        onClick: () => setCartOpen(true),
+      },
+    });
   };
 
   return (
@@ -118,7 +128,7 @@ export function Menu() {
                   <div className="mt-4 flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">★ {m.rating} • {m.category}</span>
                     <button
-                      onClick={() => addToCart(m)}
+                      onClick={() => handleAddToCart(m)}
                       className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition hover:brightness-110"
                     >
                       Add to Cart

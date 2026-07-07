@@ -38,6 +38,7 @@
 
   --font-display: "Playfair Display", "Georgia", serif;
   --font-sans: "Inter", "system-ui", sans-serif;
+  --font-devanagari: "Amita", serif;
 
   --shadow-elegant: 0 20px 60px -20px color-mix(in oklab, var(--primary) 22%, transparent);
   --shadow-soft: 0 10px 40px -12px oklch(0 0 0 / 0.12);

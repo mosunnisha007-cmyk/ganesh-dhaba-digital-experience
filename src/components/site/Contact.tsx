@@ -1,59 +1,11 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { HiPhone, HiOutlineMail, HiLocationMarker, HiClock } from "react-icons/hi";
 import { FaWhatsapp, FaDirections } from "react-icons/fa";
-import { z } from "zod";
-import { toast } from "sonner";
-
-const schema = z.object({
-  name: z.string().trim().min(2, "Name is too short").max(80),
-  email: z.string().trim().email("Invalid email").max(120),
-  phone: z.string().trim().regex(/^[0-9+\-\s()]{7,15}$/, "Invalid phone"),
-  message: z.string().trim().min(5, "Message is too short").max(600),
-});
 
 const WA_URL =
   "https://wa.me/919999999999?text=Hi%20Ganesh%20Dhaba%2C%20I'd%20like%20to%20place%20an%20order.";
 
 export function Contact() {
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [loading, setLoading] = useState(false);
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const data = Object.fromEntries(fd) as Record<string, string>;
-    const res = schema.safeParse(data);
-    if (!res.success) {
-      const errs: Record<string, string> = {};
-      res.error.issues.forEach((i) => { errs[String(i.path[0])] = i.message; });
-      setErrors(errs);
-      toast.error("Please fix the highlighted fields");
-      return;
-    }
-    setErrors({});
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 900));
-    setLoading(false);
-    toast.success("Message received!", { description: "We'll get back to you shortly." });
-    e.currentTarget.reset();
-  };
-
-  const field = (label: string, name: string, type = "text", extra?: React.InputHTMLAttributes<HTMLInputElement>) => (
-    <label className="block">
-      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">{label}</span>
-      <input
-        name={name}
-        type={type}
-        {...extra}
-        className={`w-full rounded-xl border bg-background px-4 py-3 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10 ${
-          errors[name] ? "border-destructive" : "border-border"
-        }`}
-      />
-      {errors[name] && <span className="mt-1 block text-xs text-destructive">{errors[name]}</span>}
-    </label>
-  );
-
   return (
     <section id="contact" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
@@ -67,10 +19,10 @@ export function Contact() {
           <p className="mt-4 text-muted-foreground">Reservations, feedback, catering — we'd love to hear from you.</p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2">
+        <div className="mt-14 max-w-4xl mx-auto">
           {/* Info + Map */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="space-y-6"
           >
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -97,45 +49,11 @@ export function Contact() {
                 title="Shree Ganesh Dhaba Location"
                 src="https://www.google.com/maps?q=Shree+Ganesh+Dhaba+Ridmalsar+Purohitan+Bikaner&output=embed"
                 loading="lazy"
-                className="h-[320px] w-full"
+                className="h-[400px] w-full"
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
           </motion.div>
-
-          {/* Form */}
-          <motion.form
-            onSubmit={onSubmit}
-            noValidate
-            initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-8"
-          >
-            <h3 className="font-display text-2xl font-bold">Send us a message</h3>
-            <p className="mt-1 text-sm text-muted-foreground">We usually reply within a few hours.</p>
-            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {field("Your Name", "name")}
-              {field("Phone", "phone", "tel")}
-            </div>
-            <div className="mt-4">{field("Email", "email", "email")}</div>
-            <label className="mt-4 block">
-              <span className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Message</span>
-              <textarea
-                name="message"
-                rows={5}
-                className={`w-full rounded-xl border bg-background px-4 py-3 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10 ${
-                  errors.message ? "border-destructive" : "border-border"
-                }`}
-              />
-              {errors.message && <span className="mt-1 block text-xs text-destructive">{errors.message}</span>}
-            </label>
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn-glow mt-6 inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-70"
-            >
-              {loading ? "Sending..." : "Send Message"}
-            </button>
-          </motion.form>
         </div>
       </div>
     </section>

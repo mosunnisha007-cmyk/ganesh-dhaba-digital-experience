@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { GiForkKnifeSpoon, GiFamilyHouse, GiSofa, GiCandleLight } from "react-icons/gi";
 import aboutImg from "@/assets/about-interior.jpg";
+import ambience1 from "@/assets/ambience1.png";
 
 const PILLS = [
   { icon: GiFamilyHouse, label: "Spacious Family Tables" },
@@ -60,19 +61,56 @@ export function FamilyDining() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="relative"
+          className="relative grid grid-cols-2 gap-4"
         >
-          <div className="overflow-hidden rounded-[2rem] shadow-elegant">
-            <img
-              src={aboutImg}
-              alt="Warm family dining space"
-              loading="lazy"
-              className="h-[560px] w-full object-cover"
-            />
+          <div className="flex flex-col gap-4 pt-12">
+            <motion.div 
+              animate={{ y: [0, -8, 0] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              className="overflow-hidden rounded-[2rem] shadow-elegant"
+            >
+              <img
+                src={aboutImg}
+                alt="Warm family dining space"
+                loading="lazy"
+                className="h-[300px] w-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+            </motion.div>
+            <motion.div 
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 }}
+              className="overflow-hidden rounded-[2rem] shadow-elegant"
+            >
+              {/* Using a reliable public HTTPS video with a poster to prevent empty space */}
+              <video
+                src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+                poster={aboutImg}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="h-[250px] w-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+            </motion.div>
           </div>
-          <div className="absolute -bottom-6 -left-6 hidden rounded-3xl border border-border bg-background p-5 shadow-soft sm:block">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground">Seating capacity</p>
-            <p className="mt-1 font-display text-3xl font-bold text-primary">80+ Guests</p>
+          
+          <div className="flex flex-col gap-4">
+            <motion.div 
+              animate={{ y: [0, -10, 0] }}
+              transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut", delay: 0.5 }}
+              className="overflow-hidden rounded-[2rem] shadow-elegant"
+            >
+              <img
+                src={ambience1}
+                alt="Cozy interior details"
+                loading="lazy"
+                className="h-[400px] w-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+            </motion.div>
+            <div className="rounded-3xl border border-border bg-background p-6 shadow-soft text-center flex flex-col justify-center h-[150px]">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">Seating capacity</p>
+              <p className="mt-1 font-display text-3xl font-bold text-primary">80+ Guests</p>
+            </div>
           </div>
         </motion.div>
       </div>

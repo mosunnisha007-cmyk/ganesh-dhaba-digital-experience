@@ -1,5 +1,4 @@
-import logoMark from "@/assets/ganesh-logo.png.asset.json";
-import wordmark from "@/assets/ganesh-wordmark.png.asset.json";
+import logoMark from "@/assets/ganesh-logo.png";
 
 export function Logo({
   compact = false,
@@ -13,17 +12,16 @@ export function Logo({
   return (
     <a href="#home" className="flex items-center gap-3 group">
       <img
-        src={logoMark.url}
+        src={logoMark}
         alt="Ganesh Dhaba"
         className={`shrink-0 rounded-full object-contain transition group-hover:scale-105 ${logoClassName}`}
       />
       {!compact && !hideWordmark && (
-        <img
-          src={wordmark.url}
-          alt="Ganesh Dhaba"
-          className="h-7 w-auto object-contain sm:h-8"
-        />
+        <span className="font-display text-xl font-bold tracking-wide text-foreground sm:text-2xl transition-colors group-hover:text-primary">
+          Ganesh <span className="text-primary group-hover:text-gold transition-colors">Dhaba</span>
+        </span>
       )}
     </a>
   );
 }
+

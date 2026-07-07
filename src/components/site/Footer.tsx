@@ -3,6 +3,16 @@ import { Logo } from "./Logo";
 import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { Link } from "@tanstack/react-router";
+
+const FOOTER_LINKS = [
+  { label: "Home", to: "/", hash: "home" },
+  { label: "About", to: "/", hash: "about" },
+  { label: "Menu", to: "/menu", hash: undefined },
+  { label: "Gallery", to: "/", hash: "gallery" },
+  { label: "Reviews", to: "/", hash: "reviews" },
+  { label: "Contact", to: "/", hash: "contact" },
+];
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -48,8 +58,12 @@ export function Footer() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-gold)]">Quick Links</p>
             <ul className="mt-4 space-y-2 text-sm text-background/75">
-              {["Home","About","Menu","Gallery","Reviews","Contact"].map((l) => (
-                <li key={l}><a href={`#${l.toLowerCase()}`} className="transition hover:text-primary-foreground">{l}</a></li>
+              {FOOTER_LINKS.map((l) => (
+                <li key={l.label}>
+                  <Link to={l.to as any} hash={l.hash} className="transition hover:text-primary-foreground">
+                    {l.label}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
@@ -68,7 +82,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-background/10 pt-6 text-xs text-background/60 sm:flex-row">
           <p>© {new Date().getFullYear()} Ganesh Dhaba. All rights reserved.</p>
-          <p>Designed by <span className="font-semibold text-[var(--color-gold)]">Lovable Studio</span></p>
+          <p>Designed by <span className="font-semibold text-[var(--color-gold)]">Nisha Soni</span></p>
         </div>
       </div>
     </footer>

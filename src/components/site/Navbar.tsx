@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { Logo } from "./Logo";
+import { HiMenuAlt3, HiX, HiOutlineShoppingCart } from "react-icons/hi";
+import { useCart } from "@/hooks/use-cart";
+import { Link } from "@tanstack/react-router";
 
 const NAV = [
-  { id: "about", label: "Our Story", href: "/#about" },
-  { id: "ambience", label: "Ambience", href: "/#ambience" },
-  { id: "menu", label: "Menu", href: "/menu" },
-  { id: "chefs-creation", label: "Chefs Creation", href: "/#chefs-creation" },
-  { id: "reviews", label: "Reviews", href: "/#reviews" },
-  { id: "location", label: "Location", href: "/#contact" },
-  { id: "contact", label: "Contact Us", href: "/#contact" },
+  { id: "about", label: "Our Story", to: "/", hash: "about" },
+  { id: "menu", label: "Menu", to: "/menu", hash: undefined },
+  { id: "chefs-creation", label: "Chefs Creation", to: "/", hash: "chefs-creation" },
+  { id: "ambience", label: "Ambience", to: "/", hash: "ambience" },
+  { id: "reviews", label: "Reviews", to: "/", hash: "reviews" },
+  { id: "contact", label: "Contact Us", to: "/", hash: "contact" },
 ];
 
 export function Navbar() {
@@ -19,6 +19,7 @@ export function Navbar() {
   const [active, setActive] = useState("");
   const { scrollYProgress } = useScroll();
   const width = useSpring(scrollYProgress, { stiffness: 120, damping: 25 });
+  const { cartCount, setCartOpen } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -28,19 +29,29 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
-    );
-    NAV.forEach((n) => {
-      const el = document.getElementById(n.id);
-      if (el) obs.observe(el);
-    });
-    return () => obs.disconnect();
+    const handleScrollSpy = () => {
+      const sections = NAV.map((n) => (n.hash ? document.getElementById(n.hash) : null)).filter(Boolean) as HTMLElement[];
+      let currentActive = "";
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        // 40% of viewport height as the trigger line
+        if (rect.top <= window.innerHeight * 0.4) {
+          currentActive = section.id;
+        }
+      }
+      if (currentActive) {
+        setActive(currentActive);
+      }
+    };
+
+    window.addEventListener("scroll", handleScrollSpy, { passive: true });
+    // Initial check after a short delay to ensure DOM is ready
+    const timeout = setTimeout(handleScrollSpy, 200);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollSpy);
+      clearTimeout(timeout);
+    };
   }, []);
 
   return (
@@ -60,32 +71,50 @@ export function Navbar() {
               scrolled ? "border-primary/10" : ""
             }`}
           >
-            <Logo hideWordmark logoClassName="h-[70px] w-[70px]" />
-            <nav className="hidden items-center gap-1 lg:flex">
-              {NAV.map((n) => (
-                <a
-                  key={n.id}
-                  href={n.href}
-                  className="relative rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition hover:text-primary"
-                >
-                  {n.label}
-                  {active === n.id && (
-                    <motion.span
-                      layoutId="nav-pill"
-                      className="absolute inset-0 -z-10 rounded-full bg-primary/10"
-                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                    />
-                  )}
-                </a>
-              ))}
-            </nav>
-            <button
-              aria-label="Toggle menu"
-              onClick={() => setOpen((o) => !o)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-background/60 text-foreground lg:hidden"
-            >
-              {open ? <HiX size={20} /> : <HiMenuAlt3 size={20} />}
-            </button>
+            <div className="flex w-full items-center justify-between gap-2">
+              <nav className="hidden items-center gap-1 lg:flex">
+                {NAV.map((n) => (
+                  <Link
+                    key={n.id}
+                    to={n.to as any}
+                    hash={n.hash}
+                    className="relative rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition hover:text-primary"
+                  >
+                    {n.label}
+                    {active === n.id && (
+                      <motion.span
+                        layoutId="nav-pill"
+                        className="absolute inset-0 -z-10 rounded-full bg-primary/10"
+                        transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                ))}
+              </nav>
+
+              {/* Cart Button with Count Badge */}
+              <button
+                onClick={() => setCartOpen(true)}
+                className="relative grid h-10 w-10 place-items-center rounded-full border border-border bg-background/60 text-foreground hover:text-primary hover:border-primary/30 transition shadow-soft hover:scale-105 active:scale-95 shrink-0"
+                aria-label="View Cart"
+              >
+                <HiOutlineShoppingCart size={20} />
+                {cartCount > 0 && (
+                  <span className="absolute -right-1 -top-1 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground leading-none">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+
+              {/* Mobile menu toggle */}
+              <button
+                aria-label="Toggle menu"
+                onClick={() => setOpen((o) => !o)}
+                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-background/60 text-foreground lg:hidden hover:text-primary hover:border-primary/30 transition shadow-soft shrink-0"
+              >
+                {open ? <HiX size={20} /> : <HiMenuAlt3 size={20} />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -99,9 +128,10 @@ export function Navbar() {
           <div className="glass rounded-2xl p-3 shadow-soft">
             <nav className="flex flex-col">
               {NAV.map((n) => (
-                <a
+                <Link
                   key={n.id}
-                  href={n.href}
+                  to={n.to as any}
+                  hash={n.hash}
                   onClick={() => setOpen(false)}
                   className={`rounded-xl px-4 py-3 text-sm font-medium transition ${
                     active === n.id
@@ -110,7 +140,7 @@ export function Navbar() {
                   }`}
                 >
                   {n.label}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

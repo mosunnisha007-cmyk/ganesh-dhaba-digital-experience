@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HiArrowDown } from "react-icons/hi";
+import { HiArrowDown, HiOutlineShoppingCart } from "react-icons/hi";
 import gsap from "gsap";
-import thaliBg from "@/assets/thali-bg.jpg.asset.json";
+import thaliBg from "@/assets/thali-bg.jpg";
 import { Logo } from "./Logo";
+import { useCart } from "@/hooks/use-cart";
 
 const SLIDES = [
-  { src: thaliBg.url, alt: "Traditional Indian thali spread" },
+  { src: thaliBg, alt: "Traditional Indian thali spread" },
   { src: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=1920&q=80", alt: "Paneer butter masala" },
   { src: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1920&q=80", alt: "Fragrant veg biryani" },
   { src: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=1920&q=80", alt: "Crispy masala dosa" },
@@ -14,9 +15,11 @@ const SLIDES = [
   { src: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1920&q=80", alt: "Golden dal tadka" },
 ];
 
+
 export function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [index, setIndex] = useState(0);
+  const { cartCount, setCartOpen } = useCart();
 
   useEffect(() => {
     if (!titleRef.current) return;
@@ -46,10 +49,27 @@ export function Hero() {
       id="home"
       className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden"
     >
-      {/* Logo at upper left */}
-      <div className="absolute left-4 top-4 z-30 sm:left-6 sm:top-6">
+      {/* Header Area (Logo & Cart) */}
+      <div className="absolute left-4 right-4 top-4 z-30 flex items-center justify-between sm:left-6 sm:right-6 sm:top-6">
         <Logo hideWordmark logoClassName="h-24 w-24 sm:h-32 sm:w-32" />
+        
+        <button
+          onClick={() => setCartOpen(true)}
+          className="group relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-background/10 backdrop-blur-md border border-white/20 text-white transition hover:bg-white/20 sm:h-14 sm:w-14 shadow-elegant"
+        >
+          <HiOutlineShoppingCart className="h-6 w-6" />
+          {cartCount > 0 && (
+            <motion.span
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground sm:h-6 sm:w-6 sm:text-xs"
+            >
+              {cartCount}
+            </motion.span>
+          )}
+        </button>
       </div>
+
       {/* Animated background slideshow */}
       <div className="absolute inset-0 -z-20">
         <AnimatePresence mode="sync">
@@ -103,30 +123,45 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-5xl px-6 py-24 text-center text-white">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 py-24 flex flex-col items-center justify-center text-center text-white">
 
-        <h1
-          ref={titleRef}
-          className="font-display text-5xl font-bold leading-[0.95] sm:text-7xl md:text-[104px]"
-          aria-label="GANESH DHABA"
-        >
-          <span className="block overflow-hidden">
-            {"GANESH".split("").map((c, i) => (
-              <span key={i} data-letter className="inline-block">{c}</span>
-            ))}
-          </span>
-          <span className="block overflow-hidden text-white">
-            {"DHABA".split("").map((c, i) => (
-              <span key={i} data-letter className="inline-block">{c}</span>
-            ))}
-          </span>
-        </h1>
+        {/* Top Row: Shree + Ganesh Dhaba */}
+        <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8 text-left">
+          {/* Large Shree Calligraphy (White) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, x: -30 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+            className="font-devanagari font-normal text-[85px] sm:text-[135px] md:text-[185px] text-white leading-none select-none drop-shadow-[0_4px_24px_rgba(255,255,255,0.2)] shrink-0 pr-1"
+          >
+            श्री
+          </motion.div>
 
+          {/* Title Stack */}
+          <h1
+            ref={titleRef}
+            className="font-display text-5xl font-bold leading-[0.95] sm:text-7xl md:text-[104px] text-left"
+            aria-label="GANESH DHABA"
+          >
+            <span className="block overflow-hidden">
+              {"GANESH".split("").map((c, i) => (
+                <span key={i} data-letter className="inline-block">{c}</span>
+              ))}
+            </span>
+            <span className="block overflow-hidden text-white">
+              {"DHABA".split("").map((c, i) => (
+                <span key={i} data-letter className="inline-block">{c}</span>
+              ))}
+            </span>
+          </h1>
+        </div>
+
+        {/* Subtitle centered under the entire block */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
-          className="mx-auto mt-6 max-w-2xl text-base text-white/85 sm:text-lg"
+          className="mt-8 max-w-md text-xs text-white/85 sm:max-w-2xl sm:text-base md:text-lg text-center"
         >
           Authentic Family Dining • Fast Food • Refreshing Beverages
         </motion.p>
