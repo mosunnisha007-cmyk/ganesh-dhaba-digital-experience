@@ -41,7 +41,6 @@ function Index() {
     <>
       <SmoothScroll />
       <Loader />
-      <Navbar />
       <main>
         <Hero />
         <About />
