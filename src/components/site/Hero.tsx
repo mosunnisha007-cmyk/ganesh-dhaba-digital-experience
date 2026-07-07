@@ -1,12 +1,22 @@
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { HiArrowDown } from "react-icons/hi";
 import gsap from "gsap";
 import thaliBg from "@/assets/thali-bg.jpg.asset.json";
 import { Logo } from "./Logo";
 
+const SLIDES = [
+  { src: thaliBg.url, alt: "Traditional Indian thali spread" },
+  { src: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=1920&q=80", alt: "Paneer butter masala" },
+  { src: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1920&q=80", alt: "Fragrant veg biryani" },
+  { src: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=1920&q=80", alt: "Crispy masala dosa" },
+  { src: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=1920&q=80", alt: "Pav bhaji with butter" },
+  { src: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1920&q=80", alt: "Golden dal tadka" },
+];
+
 export function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     if (!titleRef.current) return;
@@ -26,6 +36,11 @@ export function Hero() {
     );
   }, []);
 
+  useEffect(() => {
+    const t = setInterval(() => setIndex((i) => (i + 1) % SLIDES.length), 4500);
+    return () => clearInterval(t);
+  }, []);
+
   return (
     <section
       id="home"
@@ -35,16 +50,38 @@ export function Hero() {
       <div className="absolute left-4 top-4 z-30 sm:left-6 sm:top-6">
         <Logo hideWordmark logoClassName="h-24 w-24 sm:h-32 sm:w-32" />
       </div>
-      {/* Background image with slow zoom */}
+      {/* Animated background slideshow */}
       <div className="absolute inset-0 -z-20">
-        <img
-          src={thaliBg.url}
-          alt="Traditional Indian thali spread"
-          className="h-full w-full animate-gentle-zoom object-cover"
-          width={1920}
-          height={1280}
-        />
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={index}
+            src={SLIDES[index].src}
+            alt={SLIDES[index].alt}
+            initial={{ opacity: 0, scale: 1.15 }}
+            animate={{ opacity: 1, scale: 1.05 }}
+            exit={{ opacity: 0, scale: 1.0 }}
+            transition={{ opacity: { duration: 1.4, ease: "easeInOut" }, scale: { duration: 6, ease: "linear" } }}
+            className="absolute inset-0 h-full w-full object-cover"
+            width={1920}
+            height={1280}
+          />
+        </AnimatePresence>
       </div>
+
+      {/* Slide indicators */}
+      <div className="absolute bottom-24 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            aria-label={`Show slide ${i + 1}`}
+            className={`h-1.5 rounded-full transition-all duration-500 ${
+              i === index ? "w-8 bg-[var(--color-gold)]" : "w-3 bg-white/40 hover:bg-white/70"
+            }`}
+          />
+        ))}
+      </div>
+
       {/* Overlays */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/70 via-black/40 to-black/85" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.55)_100%)]" />
