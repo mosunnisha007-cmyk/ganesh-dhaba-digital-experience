@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
-import { GiCoffeeCup, GiTeapot, GiMilkCarton, GiOrangeSlice, GiMartini, GiWaterBottle, GiChocolateBar } from "react-icons/gi";
+import { Coffee, CupSoda, Milk, Citrus, Martini, GlassWater, IceCream } from "lucide-react";
 
 const DRINKS = [
-  { icon: GiWaterBottle, name: "Cold Drinks", desc: "Chilled colas, sodas & sparkling", price: "from ₹40" },
-  { icon: GiOrangeSlice, name: "Fresh Juices", desc: "Hand-pressed daily fruit juices", price: "from ₹90" },
-  { icon: GiTeapot, name: "Masala Tea", desc: "Slow-brewed cardamom chai", price: "₹40" },
-  { icon: GiCoffeeCup, name: "Cold Coffee", desc: "Espresso, milk & ice-cream", price: "₹130" },
-  { icon: GiChocolateBar, name: "Milkshakes", desc: "Thick chocolate, vanilla & strawberry", price: "₹120" },
-  { icon: GiMilkCarton, name: "Lassi", desc: "Sweet, salted or mango lassi", price: "from ₹80" },
-  { icon: GiMartini, name: "Mocktails", desc: "Refreshing non-alcoholic mixes", price: "from ₹100" },
+  { icon: GlassWater, name: "Cold Drinks", desc: "Chilled colas, sodas & sparkling", price: "from ₹40" },
+  { icon: Citrus, name: "Fresh Juices", desc: "Hand-pressed daily fruit juices", price: "from ₹90" },
+  { icon: Coffee, name: "Masala Tea", desc: "Slow-brewed cardamom chai", price: "₹40" },
+  { icon: CupSoda, name: "Cold Coffee", desc: "Espresso, milk & ice-cream", price: "₹130" },
+  { icon: IceCream, name: "Milkshakes", desc: "Thick chocolate, vanilla & strawberry", price: "₹120" },
+  { icon: Milk, name: "Lassi", desc: "Sweet, salted or mango lassi", price: "from ₹80" },
+  { icon: Martini, name: "Mocktails", desc: "Refreshing non-alcoholic mixes", price: "from ₹100" },
 ];
 
 export function Drinks() {

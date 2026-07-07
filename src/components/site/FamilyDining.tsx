@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
-import { GiForkKnifeSpoon, GiFamilyHouse, GiSofa, GiCandleLight } from "react-icons/gi";
+import { Utensils, Users, Sofa, Flame } from "lucide-react";
 import aboutImg from "@/assets/about-interior.jpg";
 import ambience1 from "@/assets/ambience1.png";
 
 const PILLS = [
-  { icon: GiFamilyHouse, label: "Spacious Family Tables" },
-  { icon: GiSofa, label: "Comfortable Booth Seating" },
-  { icon: GiCandleLight, label: "Warm Ambient Lighting" },
-  { icon: GiForkKnifeSpoon, label: "Friendly, Attentive Staff" },
+  { icon: Users, label: "Spacious Family Tables" },
+  { icon: Sofa, label: "Comfortable Booth Seating" },
+  { icon: Flame, label: "Warm Ambient Lighting" },
+  { icon: Utensils, label: "Friendly, Attentive Staff" },
 ];
 
 export function FamilyDining() {
